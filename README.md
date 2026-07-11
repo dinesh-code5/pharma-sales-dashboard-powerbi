@@ -9,7 +9,7 @@ A ZS Associates-style commercial analytics dashboard built in Power BI on a MySQ
 ## Executive Summary
 
 **SITUATION**
-Datamatrix's pharma sales organization runs 13 active reps across 3 sales teams (Delta, Charlie, Bravo, Alfa), covering 748 cities in 2 countries, generating 11.80bn in total sales across 240 products in 6 therapeutic categories.
+Datamatrix's pharma sales organization runs 13 active reps across 4 sales teams (Delta, Charlie, Bravo, Alfa), covering 748 cities in 2 countries, generating 11.80bn in total sales across 240 products in 6 therapeutic categories.
 
 **COMPLICATION**
 Raw sales totals alone don't show whether revenue is being driven by a few reps carrying the team or a genuinely well-distributed sales force — and a flat, static sales target hides whether a rep is under-target because of a weak territory or because expectations were never adjusted for their own prior-year growth. Product-level trend data also showed all 6 categories peaking around FY2018 and declining into FY2020 — a pattern that a single "Total Sales" KPI would completely mask.
