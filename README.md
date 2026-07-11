@@ -25,6 +25,21 @@ Rebuilding "Sales Target" as a dynamic measure (prior-year sales scaled by compa
 
 The dashboard is built around four connected views, designed to move from a high-level executive summary down to individual sales rep and product-level detail — the same drill pattern used in commercial pharma analytics teams to go from "what happened" to "who/what is driving it."
 
+## Repository Structure
+
+```
+Datamatrix-Pharma-Analytics/
+├── README.md
+├── dashboard.pbix
+├── screenshots/
+│   ├── page1_executive_overview.png
+│   ├── page2_sales_rep_performance.png
+│   ├── page3_geographic_analysis.png
+│   └── page4_product_deep_dive.png
+└── sql/
+    └── schema_creation.sql       (staging → dimension → fact build, with data quality checks and interview-ready queries)
+```
+
 ## Dashboard Pages
 
 ### 1. Executive Sales Overview
@@ -62,20 +77,22 @@ Hero product callout (**Ionclotide**), top 5 products by sales, and a 6-category
 
 ## Data Model
 
-Built on a MySQL star schema, imported into Power BI:
+Built on a MySQL star schema (see [`sql/schema_creation.sql`](sql/schema_creation.sql)), imported into Power BI:
 
 | Table | Role |
 |---|---|
-| `pharma_sales fact_sales` | Fact table — transaction-level sales, quantity, returns |
-| `pharma_sales_dim_salesrep` | Sales rep dimension — rep name, manager, team |
-| `pharma_sales_dim_product` | Product dimension — product name, class/category |
-| `pharma_sales_dim_date` (Calendar) | Date dimension — includes `MonthYear` and `MonthYearSort` helper columns for correct chronological axis sorting |
-| `pharma_sales_dim_customer` | Customer/channel dimension |
+| `fact_sales` | Fact table — one row per transaction: quantity, price, sales value, and a `transaction_type` flag (Sale/Return) |
+| `dim_salesrep` | Sales rep dimension — rep name, manager, sales team |
+| `dim_product` | Product dimension — product name, product class/category |
+| `dim_date` | Date dimension — year, month, month name, quarter (extended in Power BI with `MonthYear` and `MonthYearSort` helper columns for correct chronological axis sorting) |
+| `dim_customer` | Customer/channel dimension — city, country, lat/long, channel, sub-channel, distributor |
+
+**Build process:** raw CSV loaded into a `staging_sales` table first, then data quality checks run (null sales, negative sales, year range) before splitting into dimension and fact tables. Negative sales values are kept (they represent legitimate returns/reversals in distributor data) and flagged via `transaction_type`, rather than being dropped — this lets Power BI measures choose to include or exclude returns depending on the KPI (e.g., `Net Sales (excl. returns)` on the Executive Overview page).
 
 ## Key DAX Measures
 
 ```dax
-Total Sales = SUM('pharma_sales fact_sales'[total_sales])
+Total Sales = SUM(fact_sales[sales_value])
 
 Total Sales PY = 
 CALCULATE([Total Sales], SAMEPERIODLASTYEAR('Calendar'[Date]))
