@@ -37,7 +37,7 @@ Datamatrix-Pharma-Analytics/
 │   ├── page3_geographic_analysis.png
 │   └── page4_product_deep_dive.png
 └── sql/
-    └── schema_creation.sql       (staging → dimension → fact build, with data quality checks and interview-ready queries)
+    └── pharma_star_schema_2.sql       (staging → dimension → fact build, with data quality checks and interview-ready queries)
 ```
 
 ## Dashboard Pages
