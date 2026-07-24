@@ -1,6 +1,6 @@
 # Datamatrix Pharma Analytics — Sales Force Performance & Territory Analysis
 
-A ZS Associates-style commercial analytics dashboard built in Power BI on a MySQL star schema backend, analyzing pharmaceutical sales performance across sales reps, territories, and product lines — built as a placement portfolio project targeting Data Analyst roles at ZS Associates and similar pharma commercial analytics firms.
+A ProcDna Associates-style commercial analytics dashboard built in Power BI on a MySQL star schema backend, analyzing pharmaceutical sales performance across sales reps, territories, and product lines — built as a placement portfolio project targeting Data Analyst roles at ZS Associates and similar pharma commercial analytics firms.
 
 `Power BI` `MySQL` `DAX` `Star Schema`
 
